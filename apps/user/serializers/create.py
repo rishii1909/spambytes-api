@@ -13,5 +13,6 @@ class CreateUserSerializer(serializers.ModelSerializer):
             "last_name",
             "email_address",
             "phone_number",
-            "user_password"
+            "user_password",
+            "deleted"
         ]

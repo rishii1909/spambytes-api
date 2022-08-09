@@ -1,9 +1,11 @@
+from datetime import date
 from drf_rw_serializers.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework import filters
 from drf_yasg.utils import swagger_auto_schema
 from django_filters.rest_framework import DjangoFilterBackend
 from apps.user.api.filters.user_filter import UserFilter
+from apps.user.constants.user_constants import DELETE_SUCCESS
 
 from apps.user.models import User
 from apps.user.serializers.create import CreateUserSerializer
@@ -39,3 +41,9 @@ class UserDetailView(RetrieveUpdateDestroyAPIView):
     @swagger_auto_schema(request_body=CreateUserSerializer)
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        request.data['deleted_on'] = date.today()
+        self.patch(request, *args, **kwargs)
+        self.destroy(request, *args, **kwargs)
+        return DELETE_SUCCESS
