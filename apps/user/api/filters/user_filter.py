@@ -21,7 +21,7 @@ class UserFilter(filters.FilterSet):
         model = User
         fields = {
             'uuid': ['exact'],
-            'email': ['exact']
+            'email_address': ['exact']
         }
 
     def user_full_name(self, queryset, name, value):

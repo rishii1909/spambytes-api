@@ -1,6 +1,4 @@
-import logging
 from rest_framework import serializers
-from rest_framework.fields import UUIDField
 
 from apps.user.models import User
 

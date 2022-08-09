@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+from datetime import timedelta
+
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +28,7 @@ SECRET_KEY = '838pr1$r4=l8x#nlffrg6p5bj9($0*t&ol1-dz+k!o9*c-7a7)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 DATABASES = {
@@ -128,7 +131,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -141,3 +144,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# =========================================================================================
+
+SPECTACULAR_SETTINGS = {
+    'SCHEMA_PATH_PREFIX': r'/api/v1/[a-z]*',
+}
+
+AUTH_USER_MODEL = "user.User"
+
+ROOT_URLCONF = "spambytes_api_server.urls"
+

@@ -14,7 +14,7 @@ class UserListCreateAPI(ListCreateAPIView):
     """
     Session Feedback API for the User (Parent)
     """
-    queryset = User.objects.filter(deleted=False).select_related('user')
+    queryset = User.objects.filter(deleted=False)
     read_serializer_class = GetUserSerializer
     write_serializer_class = CreateUserSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -27,7 +27,7 @@ class UserListCreateAPI(ListCreateAPIView):
 
 class UserDetailView(RetrieveUpdateDestroyAPIView):
     
-    queryset = User.objects.filter(deleted=False).select_related('user')
+    queryset = User.objects.filter(deleted=False)
     read_serializer_class = GetUserSerializer
     write_serializer_class = CreateUserSerializer
     lookup_field = 'uuid'
