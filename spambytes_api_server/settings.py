@@ -30,21 +30,30 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
+# Database
+# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 DATABASES = {
         'default': {
         'ENGINE': 'djongo',
+        'NAME': 'dev',
         'CLIENT': {
-            "host": "mongodb+srv://spambytes:spambytes@cluster0.viuzp9j.mongodb.net/dev",
+            "host": "mongodb+srv://spambytes:spambytes@cluster0.viuzp9j.mongodb.net/?retryWrites=true&w=majority",
             "name": "dev",
             "user": "spambytes",
             "password": "spambytes",
-            "authMechanism": "SCRAM-SHA-1"
-        }
-        # 'NAME': 'dev',
-        # 'HOST': 'mongodb+srv://cluster0.viuzp9j.mongodb.net/dev',
-        # 'USER': 'spambytes',
-        # 'PASSWORD': 'spambytes',
+            #"authMechanism": "SCRAM-SHA-1"
+        },
+        'HOST': 'mongodb+srv://spambytes:spambytes@cluster0.viuzp9j.mongodb.net/?retryWrites=true&w=majority',
+        'USER': 'spambytes',
+        'PASSWORD': 'spambytes',
     }
 }
 
@@ -94,17 +103,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'spambytes_api_server.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
