@@ -68,7 +68,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'apps.user'
+    'apps.user',
+    'apps.shield'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -143,6 +144,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 # =========================================================================================
 
 SPECTACULAR_SETTINGS = {
@@ -153,3 +155,4 @@ AUTH_USER_MODEL = "user.User"
 
 ROOT_URLCONF = "spambytes_api_server.urls"
 
+DATA_URL = BASE_DIR+'/apps/shield/data/'

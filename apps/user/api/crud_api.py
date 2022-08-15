@@ -14,7 +14,7 @@ from apps.user.serializers.read import GetUserSerializer
 
 class UserListCreateAPI(ListCreateAPIView):
     """
-    Session Feedback API for the User (Parent)
+    User Objects GET and POST API
     """
     queryset = User.objects.filter(deleted=False)
     read_serializer_class = GetUserSerializer
