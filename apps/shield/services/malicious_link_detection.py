@@ -62,7 +62,7 @@ def malicious_link_detection(test_link): # list of links
 
     # 3. Parse data
     test_data = vectorizer.transform(test_link)
-    print(test_data.shape)
+    #print(test_data.shape)
 
     # 4. load the model from disk
     malicious_url_model = joblib.load("apps/shield/data/malicious_url_model.sav")
@@ -77,5 +77,5 @@ def malicious_link_detection(test_link): # list of links
 
     return resultset
     
-#malicious_link_detection(["amazon.com", "amazon.in", "xxxx.yyy"])
-# train_malicious_link_detection()
+#malicious_link_detection(["amazon.com", "mitaoe.ac.in", "xxxx.yyy"])
+#train_malicious_link_detection()
