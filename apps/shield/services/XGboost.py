@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import random
+import pickle
 from django.conf import settings
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -59,7 +60,6 @@ def train_malicious_link_detection():
     y_train_xgb = xgb.predict(X_train)
     model_score=xgb.score(X_test, y_test)
 
-    import pickle
     pickle.dump(xgb, open("XGBoostClassifier.pickle.dat", "wb"))
     pickle.dump(xgb, open("phishing.pkl", "wb"))
 

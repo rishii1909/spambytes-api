@@ -1,5 +1,6 @@
 from cgi import test
 from datetime import date
+from typing import List
 from drf_rw_serializers.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.response import Response
 from rest_framework import filters
@@ -17,5 +18,8 @@ class MaliciousLinkDetectionAPI(ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         test_link = request.data.get("test_url", None)
-        malicious_link_detection([test_link])
-        return Response({'success':None})
+        test_link = test_link if type(test_link) == list else [test_link]
+
+        result = malicious_link_detection(test_link)
+        print(result)
+        return Response({'success':True, 'url_result':result})

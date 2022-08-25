@@ -73,9 +73,9 @@ def malicious_link_detection(test_link): # list of links
     # 6. construct resultset
     resultset = {}
     for i in range(len(test_link)):
-        resultset.update({test_link[i]:result[i]})
+        resultset.update({test_link[i]: True if result[i] == 'good' else False })
 
-    return resultset
+    return resultset    # {'amazon.com': 'good', 'mitaoe.ac.in': 'good', 'xxxx.yyy': 'bad'}
     
 #malicious_link_detection(["amazon.com", "mitaoe.ac.in", "xxxx.yyy"])
 #train_malicious_link_detection()
