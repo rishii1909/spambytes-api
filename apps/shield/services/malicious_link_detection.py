@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 def train_malicious_link_detection():
 
     """
-        Dataset-Source: https://github.com/cozpii/Malicious-URL-detection
+        Dataset-Source: https://www.kaggle.com/datasets/sid321axn/malicious-urls-dataset + https://github.com/cozpii/Malicious-URL-detection 
     """
     
     #data = pd.read_csv(settings.DATA_URL+"url_data.csv")
@@ -73,7 +73,7 @@ def malicious_link_detection(test_link): # list of links
     # 6. construct resultset
     resultset = {}
     for i in range(len(test_link)):
-        resultset.update({test_link[i]: False if result[i] == 'good' else True })
+        resultset.update({test_link[i]: False if result[i] == 0 else True })
 
     return resultset    # {'amazon.com': 'good', 'mitaoe.ac.in': 'good', 'xxxx.yyy': 'bad'}
     
