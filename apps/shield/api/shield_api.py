@@ -36,6 +36,6 @@ class SpamContentDetectionAPI(ListCreateAPIView):
         email_body_text = request.data.get("email_body_text", None)
         #email_body_text = email_body_text if type(email_body_text) == list else [email_body_text]
 
-        result, spam_percent = keyword_extraction(email_body_text)
+        result, spam_percent = keyword_extraction(email_body_text.lower())
         print(result, spam_percent)
         return Response({'success':True, 'spam_result':result, 'spam_percent':spam_percent})

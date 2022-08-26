@@ -18,8 +18,8 @@ SPAM_DICTIONARY = [
                     "exclusive offer", "hurry now", "kill you", "fuck you", "bitch", "won free", "win free",
                     "win exciting", "exotic collection", "exclusive prize", "fuck", "fucker", "sex", "sexy", ""
                     "congrats", "!!!!", "!!!", "!!", "win exciting prize", "100 % discount", "50% discount", "click here",
-                    "chance to win", "exciting prize", "Grand Prize", "won $", "won Rs", "win $", "claim your prize", "claim now",
-                    "you’ve won the $"
+                    "chance to win", "exciting prize", "Grand Prize", "won the $500", "won Rs", "win $", "claim your prize", "claim now",
+                    "you’ve won the $", "giveaway"
                 ]
 
 def train_keyword_extraction():
@@ -47,6 +47,8 @@ def train_keyword_extraction():
 def keyword_extraction(email_text_content):
 
     match_count = 0
+    result = ""
+
     for spam_word in SPAM_DICTIONARY:
         if spam_word in email_text_content :
             result = True
@@ -57,9 +59,10 @@ def keyword_extraction(email_text_content):
         keyword_model = pickle.load(open('apps/shield/data/spam_text.model', 'rb'))
         
         # 2. Prediction from trained model
-        result = True if keyword_model.predict(cv.transform([email_text_content])) == 'spam' else False
+        if result == "":
+            result = True if keyword_model.predict(cv.transform([email_text_content])) == 'spam' else False
     
-    spam_percent = match_count / len(email_text_content) * 100
+    spam_percent = (match_count / len(email_text_content)) * 100
     
     return result, spam_percent
 
