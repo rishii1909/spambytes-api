@@ -19,7 +19,7 @@ SPAM_DICTIONARY = [
                     "win exciting", "exotic collection", "exclusive prize", "fuck", "fucker", "sex", "sexy", ""
                     "congrats", "!!!!", "!!!", "!!", "win exciting prize", "100 % discount", "50% discount", "click here",
                     "chance to win", "exciting prize", "Grand Prize", "won the $500", "won Rs", "win $", "claim your prize", "claim now",
-                    "you’ve won the $", "giveaway"
+                    "you’ve won the $", "giveaway", "You have won", "won the", "have won"
                 ]
 
 def train_keyword_extraction():
