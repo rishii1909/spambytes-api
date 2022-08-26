@@ -1,3 +1,4 @@
+import email
 import pandas as pd
 import numpy as np
 import joblib
@@ -13,10 +14,12 @@ from sklearn import svm
 from sklearn.model_selection import GridSearchCV
 
 SPAM_DICTIONARY = [
-                    "lottery", "free", "win", "jumbo offer", "free offer", "offer", "100% off",
+                    "lottery", "free", "win", "jumbo offer", "free offer", "offer", "100% off", "exclusive offer"
                     "exclusive offer", "hurry now", "kill you", "fuck you", "bitch", "won free", "win free",
-                    "win exciting", "exotic collection", "exclusive collection", "fuck", "fuck", "sex", "sexy",
-                    "congrats", "!!!!", "!!!", "!!"
+                    "win exciting", "exotic collection", "exclusive prize", "fuck", "fucker", "sex", "sexy", ""
+                    "congrats", "!!!!", "!!!", "!!", "win exciting prize", "100 % discount", "50% discount", "click here",
+                    "chance to win", "exciting prize", "Grand Prize", "won $", "won Rs", "win $", "claim your prize", "claim now",
+                    "you’ve won the $"
                 ]
 
 def train_keyword_extraction():
@@ -43,10 +46,11 @@ def train_keyword_extraction():
 
 def keyword_extraction(email_text_content):
 
+    match_count = 0
     for spam_word in SPAM_DICTIONARY:
         if spam_word in email_text_content :
             result = True
-            break
+            match_count += 1
     else:
         # 1. Load model
         cv = pickle.load(open('apps/shield/data/vectorizer.pickle', 'rb'))
@@ -55,8 +59,9 @@ def keyword_extraction(email_text_content):
         # 2. Prediction from trained model
         result = True if keyword_model.predict(cv.transform([email_text_content])) == 'spam' else False
     
-    #print(result)
-    return result
+    spam_percent = match_count / len(email_text_content) * 100
+    
+    return result, spam_percent
 
 
 #train_keyword_extraction()
