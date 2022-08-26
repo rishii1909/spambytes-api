@@ -12,6 +12,12 @@ from sklearn.naive_bayes import MultinomialNB , GaussianNB
 from sklearn import svm
 from sklearn.model_selection import GridSearchCV
 
+SPAM_DICTIONARY = [
+                    "lottery", "free", "win", "jumbo offer", "free offer", "offer", "100% off",
+                    "exclusive offer", "hurry now", "kill you", "fuck you", "bitch", "won free", "win free",
+                    "win exciting", "exotic collection", "exclusive collection", "fuck", "fuck", "sex", "sexy",
+                    "congrats", "!!!!", "!!!", "!!"
+                ]
 
 def train_keyword_extraction():
 
@@ -37,15 +43,20 @@ def train_keyword_extraction():
 
 def keyword_extraction(email_text_content):
 
-    # 1. Load model
-    cv = pickle.load(open('apps/shield/data/vectorizer.pickle', 'rb'))
-    keyword_model = pickle.load(open('apps/shield/data/spam_text.model', 'rb'))
+    for spam_word in SPAM_DICTIONARY:
+        if spam_word in email_text_content :
+            result = True
+            break
+    else:
+        # 1. Load model
+        cv = pickle.load(open('apps/shield/data/vectorizer.pickle', 'rb'))
+        keyword_model = pickle.load(open('apps/shield/data/spam_text.model', 'rb'))
+        
+        # 2. Prediction from trained model
+        result = True if keyword_model.predict(cv.transform([email_text_content])) == 'spam' else False
     
-    # 2. Prediction from trained model
-    result = keyword_model.predict(cv.transform([email_text_content]))
-    
-    print(result)
-    return True if result == 'spam' else False
+    #print(result)
+    return result
 
 
 #train_keyword_extraction()
