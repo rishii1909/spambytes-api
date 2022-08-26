@@ -34,20 +34,20 @@ def train_malicious_link_detection():
     #print(X.shape)
     
     # Split into training and testing dataset 80:20 ratio
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
     # Model Building using logistic regression
-    logit = LogisticRegression()
+    logit = LogisticRegression(max_iter=100000000)
     logit.fit(X_train, y_train)
 
     # Accuracy of Our Model
-    print("Accuracy of our model is: ",logit.score(X_test, y_test))
+    print("Accuracy of our model is: ",logit.score(X_test, y_test)*100,"%", "\nOver training on",np.shape(X_train)[0],"records")
     
     # save the model to disk
     malicious_url_model_dump = 'apps/shield/data/malicious_url_model.sav'
     joblib.dump(logit, malicious_url_model_dump)
 
-    print("\nTraining completed for ")
+    print("\nTraining cycle completed for Malicious URL model.")
 
 
 def malicious_link_detection(test_link): # list of links
